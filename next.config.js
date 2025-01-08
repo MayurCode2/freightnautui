@@ -1,16 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+    unoptimized: true
   },
-  distDir: 'dist'
+  // Add this to handle client-side navigation
+  experimental: {
+    scrollRestoration: true
+  }
 }
 
 module.exports = nextConfig 

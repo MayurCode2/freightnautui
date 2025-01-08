@@ -11,28 +11,27 @@ export default function Navbar({ isDark, toggleTheme }) {
   const navItems = [
     { 
       label: 'Home', 
-      href: '#hero',
-    
-    },
-    { 
-      label: 'Services', 
-      href: '#services-section',
-     
+      href: '#hero'
     },
     { 
       label: 'About', 
-      href: '#about-section',
-     
+      href: '#about-section'
+    },
+    { 
+      label: 'Services', 
+      href: '#services-section'
+    },
+    { 
+      label: 'Software', 
+      href: '#software-section'
     },
     { 
       label: 'Problems', 
-      href: '#problems-section',
-      
+      href: '#problems-section'
     },
     { 
       label: 'Contact', 
-      href: '#contact-section',
-     
+      href: '#contact-section'
     }
   ];
 
@@ -94,13 +93,12 @@ export default function Navbar({ isDark, toggleTheme }) {
                 onClick={(e) => scrollToSection(e, item.href)}
                 className={`nav-link relative py-2 text-sm font-medium
                   ${isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'}
-                  transition-colors duration-300 flex items-center space-x-2
+                  transition-colors duration-300
                   after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0
                   after:bg-blue-500 after:transition-all after:duration-300
                   hover:after:w-full`}
               >
-                <span className="text-lg">{item.icon}</span>
-                <span>{item.label}</span>
+                {item.label}
               </a>
             ))}
 

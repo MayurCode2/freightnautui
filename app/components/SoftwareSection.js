@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useEffect } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,16 +35,21 @@ function SoftwareSection({ isDark }) {
         }
       ];
 
-      gsap.from(softwareHeaderRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: softwareHeaderRef.current,
-          start: "top center+=100",
-          toggleActions: "play none none reverse"
-        }
-      });
+      useEffect(() => {
+        // Move GSAP registration and animations inside useEffect
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.from(softwareHeaderRef.current, {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: softwareHeaderRef.current,
+                start: "top center+=100",
+                toggleActions: "play none none reverse"
+            }
+        });
+    }, []);
     
   return (
     <section className="py-16 md:py-32 relative overflow-hidden">
