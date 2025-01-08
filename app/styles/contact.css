@@ -1,0 +1,309 @@
+/* Contact Section Styles */
+.contact-section {
+  @apply overflow-hidden;
+}
+
+.contact-badge {
+  @apply px-6 py-2 rounded-full relative
+         backdrop-blur-sm border-2
+         overflow-hidden
+         transition-all duration-300;
+  background: linear-gradient(
+    45deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(147, 51, 234, 0.1)
+  );
+}
+
+.contact-form-container {
+  @apply p-8 rounded-2xl backdrop-blur-md
+         transition-all duration-500
+         hover:shadow-xl;
+}
+
+.light-form {
+  @apply bg-white/80
+         border border-slate-200
+         shadow-lg shadow-slate-200/10;
+}
+
+.dark-form {
+  @apply bg-slate-800/50
+         border border-white/10
+         shadow-lg shadow-black/10;
+}
+
+.contact-input {
+  @apply w-full px-4 py-3 rounded-xl
+         border transition-all duration-300
+         focus:outline-none focus:ring-2 focus:ring-blue-500/50;
+}
+
+.light-form .contact-input {
+  @apply bg-white/50 border-slate-200
+         focus:bg-white;
+}
+
+.dark-form .contact-input {
+  @apply bg-slate-800/30 border-slate-700
+         text-white placeholder-slate-400
+         focus:bg-slate-800/50;
+}
+
+.submit-button {
+  @apply w-full px-8 py-4 rounded-xl
+         bg-gradient-to-r from-blue-500 to-blue-600
+         text-white font-medium
+         flex items-center justify-center
+         transition-all duration-300
+         hover:shadow-lg hover:shadow-blue-500/25
+         hover:-translate-y-1;
+}
+
+.contact-info-container {
+  @apply p-8 rounded-2xl backdrop-blur-md
+         transition-all duration-500;
+}
+
+.light-info {
+  @apply bg-white/80
+         border border-slate-200
+         shadow-lg shadow-slate-200/10;
+}
+
+.dark-info {
+  @apply bg-slate-800/50
+         border border-white/10
+         shadow-lg shadow-black/10;
+}
+
+.contact-info-item {
+  @apply flex items-start space-x-4
+         p-4 rounded-xl transition-all duration-300
+         hover:bg-blue-500/5;
+}
+
+.contact-icon {
+  @apply p-2 rounded-lg
+         bg-gradient-to-br from-blue-500/10 to-purple-500/10
+         border border-blue-500/20
+         text-blue-500
+         transition-all duration-300
+         group-hover:scale-110;
+}
+
+.contact-text {
+  @apply flex-1;
+}
+
+/* Animation classes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Map Container Styles */
+.map-container {
+  @apply relative rounded-xl overflow-hidden
+         backdrop-blur-md
+         transition-all duration-500
+         hover:shadow-xl;
+}
+
+.light-map {
+  @apply bg-white/80
+         border border-slate-200
+         shadow-lg shadow-slate-200/10
+         p-2;
+}
+
+.dark-map {
+  @apply bg-slate-800/50
+         border border-white/10
+         shadow-lg shadow-black/10
+         p-2;
+}
+
+/* Add hover effect for the map container */
+.map-container:hover {
+  @apply transform -translate-y-1;
+}
+
+/* Add a gradient overlay for dark mode */
+.dark-map::before {
+  content: '';
+  @apply absolute inset-0 pointer-events-none
+         bg-gradient-to-b from-transparent to-slate-900/10
+         z-10;
+}
+
+/* Add animation for map loading */
+@keyframes mapFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.map-container iframe {
+  animation: mapFadeIn 1s ease-out forwards;
+}
+
+/* Add responsive padding */
+@media (max-width: 768px) {
+  .map-container {
+    @apply mx-4;
+  }
+}
+
+/* Add these new styles */
+.feature-showcase {
+  @apply relative;
+}
+
+.feature-showcase::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-br opacity-0 rounded-2xl
+         transition-opacity duration-300;
+}
+
+.feature-showcase:hover::before {
+  @apply opacity-100;
+}
+
+.software-badge {
+  @apply px-6 py-2 rounded-full
+         backdrop-blur-sm border
+         bg-gradient-to-r from-blue-500/10 to-indigo-500/10
+         border-blue-500/20
+         transition-all duration-300;
+}
+
+.software-badge-text {
+  @apply text-sm font-semibold tracking-wider
+         bg-gradient-to-r from-blue-500 to-indigo-500
+         bg-clip-text text-transparent;
+}
+
+/* Feature Items Styles */
+.feature-item-left,
+.feature-item-right {
+  @apply relative;
+}
+
+.feature-item-left::before,
+.feature-item-right::before {
+  content: '';
+  @apply absolute top-1/2 w-16 h-[2px]
+         bg-gradient-to-r from-blue-500/50 to-transparent
+         opacity-0 transition-all duration-300;
+}
+
+/* Hide connecting lines on mobile */
+@media (max-width: 768px) {
+  .feature-item-left::before,
+  .feature-item-right::before {
+    @apply hidden;
+  }
+  
+  .software-badge {
+    @apply px-4 py-1.5 text-sm;
+  }
+  
+  .software-badge-text {
+    @apply text-xs;
+  }
+}
+
+/* Adjust spacing for different screen sizes */
+@media (min-width: 769px) {
+  .feature-item-left::before {
+    @apply right-0 translate-x-full;
+  }
+  
+  .feature-item-right::before {
+    @apply left-0 -translate-x-full;
+    background: linear-gradient(to left, transparent, rgba(59, 130, 246, 0.5));
+  }
+  
+  .feature-item-left:hover::before,
+  .feature-item-right:hover::before {
+    @apply opacity-100;
+  }
+}
+
+@media (max-width: 1024px) {
+  .feature-item-left::before,
+  .feature-item-right::before {
+    @apply hidden;
+  }
+}
+
+/* Service Section Styles */
+.service-badge-enhanced {
+  @apply px-6 py-2 rounded-full
+         backdrop-blur-sm border
+         bg-gradient-to-r from-blue-500/10 to-indigo-500/10
+         border-blue-500/20
+         transition-all duration-300;
+}
+
+.badge-text-enhanced {
+  @apply text-sm font-semibold tracking-wider
+         bg-gradient-to-r from-blue-500 to-indigo-500
+         bg-clip-text text-transparent;
+}
+
+/* Animation for floating effect */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .service-badge-enhanced {
+    @apply px-4 py-1.5;
+  }
+  
+  .badge-text-enhanced {
+    @apply text-xs;
+  }
+}
+
+/* Problem Section Styles */
+.problems-badge {
+  @apply px-6 py-2 rounded-full
+         backdrop-blur-sm border
+         bg-gradient-to-r from-blue-500/10 to-indigo-500/10
+         border-blue-500/20
+         transition-all duration-300;
+}
+
+.badge-text {
+  @apply text-sm font-semibold tracking-wider
+         bg-gradient-to-r from-blue-500 to-indigo-500
+         bg-clip-text text-transparent;
+}
+
+@media (max-width: 768px) {
+  .problems-badge {
+    @apply px-4 py-1.5;
+  }
+  
+  .badge-text {
+    @apply text-xs;
+  }
+} 
