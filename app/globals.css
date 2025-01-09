@@ -1837,11 +1837,33 @@ html {
 }
 
 .service-card {
-  @apply relative p-8 rounded-2xl
-         backdrop-blur-sm
-         transition-all duration-500
-         hover:-translate-y-2
-         overflow-hidden;
+  @apply relative overflow-hidden rounded-2xl transition-all duration-500;
+  backdrop-filter: blur(8px);
+}
+
+.service-card::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+}
+
+.service-card:hover::before {
+  @apply opacity-100;
+}
+
+.feature-icon {
+  @apply relative w-12 h-12 rounded-xl flex items-center justify-center;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+}
+
+.feature-icon::before {
+  content: '';
+  @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
+}
+
+.feature-icon:hover::before {
+  @apply opacity-100;
 }
 
 .light-service {
@@ -3080,4 +3102,32 @@ body {
   @apply bg-white/10 backdrop-blur-md
          border-white/30 text-white
          hover:bg-white/20;
+}
+
+/* Software Section Image Styles */
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.aspect-h-9 {
+  position: relative;
+}
+
+.feature-block {
+  @apply relative;
+}
+
+.feature-block::after {
+  content: '';
+  @apply absolute w-1/2 h-1/2 bg-gradient-to-br from-blue-500/5 to-purple-500/5
+         rounded-full blur-[100px] -z-10;
+}
+
+.feature-block:nth-child(odd)::after {
+  @apply right-0 top-0;
+}
+
+.feature-block:nth-child(even)::after {
+  @apply left-0 bottom-0;
 }
