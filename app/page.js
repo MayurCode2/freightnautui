@@ -39,18 +39,26 @@ export default function Home() {
           ref={heroRef}
           className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
-          {/* Advanced Background Effects */}
+          {/* Background Image with Overlay */}
           <div className="absolute inset-0">
-            {/* Animated Grid */}
-            <div className="animated-grid opacity-20"></div>
+            <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                 style={{
+                   backgroundImage: `url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80')`,
+                 }}
+            />
+            {/* Dark Overlay with Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
             
-            {/* Glowing Orbs */}
-            <div className="glow-orb primary"></div>
-            <div className="glow-orb secondary"></div>
-            <div className="glow-orb tertiary"></div>
+            {/* Animated Grid with reduced opacity */}
+            <div className="animated-grid opacity-10"></div>
+            
+            {/* Glowing Orbs with adjusted opacity */}
+            <div className="glow-orb primary opacity-40"></div>
+            <div className="glow-orb secondary opacity-40"></div>
+            <div className="glow-orb tertiary opacity-40"></div>
             
             {/* Particle Effect */}
-            <div className="particles-container">
+            <div className="particles-container opacity-30">
               {Array.from({ length: 50 }).map((_, i) => (
                 <div
                   key={i}
@@ -65,8 +73,8 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Light Paths */}
-            <div className="light-paths">
+            {/* Light Paths with reduced opacity */}
+            <div className="light-paths opacity-20">
               {Array.from({ length: 3 }).map((_, i) => (
                 <div
                   key={i}
