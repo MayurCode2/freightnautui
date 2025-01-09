@@ -1,235 +1,221 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import ProblemSection from '../components/ProblemSection';
-import ContactSection from '../components/ContactSection';
+import Image from 'next/image';
 import '../styles/contact.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About({ isDark }) {
-  const cardsRef = useRef([]);
-  const imageRef = useRef(null);
-  const headerRef = useRef(null);
-  const softwareHeaderRef = useRef(null);
-  const featuresRef = useRef([]);
-  const dashboardRef = useRef(null);
-  const [showCards, setShowCards] = useState(true);
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
 
-  const cards = [
-    {
-      icon: "🎯",
-      title: "Our Mission",
-      description: "To provide innovative and efficient logistics solutions that empower businesses to thrive in the global market."
-    },
-    {
-      icon: "👥",
-      title: "Our Team",
-      description: "A dedicated team of logistics experts with decades of combined experience in the industry."
-    },
-    {
-      icon: "⭐",
-      title: "Our Values",
-      description: "Integrity, reliability, and excellence in every aspect of our service delivery."
-    }
-  ];
-
-  
   useEffect(() => {
-    // Header Animation
-    gsap.from(headerRef.current, {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: headerRef.current,
-        start: "top center+=100",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    // Image Animation
-    gsap.from(imageRef.current, {
-      y: 100,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: imageRef.current,
-        start: "top center+=100",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    // Cards Animation
-    cardsRef.current.forEach((card, index) => {
-      gsap.from(card, {
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        delay: index * 0.2,
-        scrollTrigger: {
-          trigger: card,
-          start: "top center+=150",
-          toggleActions: "play none none reverse"
-        }
-      });
-    });
-
-    // Add software section animations
-    gsap.from(softwareHeaderRef.current, {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: softwareHeaderRef.current,
-        start: "top center+=100",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    // Features animation
-    featuresRef.current.forEach((feature, index) => {
-      gsap.from(feature, {
+    const content = contentRef.current;
+    
+    gsap.fromTo(content.children,
+      {
         y: 50,
-        opacity: 0,
-        duration: 0.8,
-        delay: index * 0.2,
+        opacity: 0
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: feature,
+          trigger: content,
           start: "top center+=100",
+          end: "bottom center",
           toggleActions: "play none none reverse"
         }
-      });
-    });
-
-    // Dashboard animation
-    gsap.from(dashboardRef.current, {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: dashboardRef.current,
-        start: "top center+=100",
-        toggleActions: "play none none reverse"
       }
-    });
+    );
   }, []);
 
   return (
-    <section className={`min-h-screen relative overflow-hidden transition-colors duration-300 ${
-      isDark ? 'bg-[#0A0F1C] text-white' : 'bg-white text-slate-900'
-    }`}>
-      {/* Background Effects */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-radial"></div>
+    <section 
+      ref={sectionRef}
+      className={`min-h-screen relative overflow-hidden transition-colors duration-300 ${
+        isDark ? 'bg-[#0A0F1C] text-white' : 'bg-white text-slate-900'
+      }`}
+    >
+      {/* Modern Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-radial opacity-20"></div>
+        <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute left-0 bottom-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4 py-24">
-        {/* Header Section */}
-        <div ref={headerRef} className="text-center mb-20">
-          <div className="inline-block mb-4">
-            <div className="rust-badge">
-              <span className="rust-text">ABOUT US</span>
-              <div className="rust-line"></div>
-            </div>
+      {/* Main Content */}
+      <div ref={contentRef} className="relative z-10 container mx-auto px-4 py-24">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="inline-flex items-center px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 mb-6">
+            <span className="w-2 h-2 rounded-full bg-blue-500 mr-2 animate-pulse"></span>
+            <span className="text-blue-500 font-medium">About Freightnaut</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-            Revolutionizing Global <span className="text-gradient">Logistics</span>
+          <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
+            Transforming Global 
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              Logistics Solutions
+            </span>
           </h1>
-          <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-            Your trusted partner in global logistics since 2022
+          <p className={`text-xl leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+            We're revolutionizing the freight industry with cutting-edge technology and unparalleled expertise
           </p>
         </div>
 
-        {/* Image Section */}
-        <div ref={imageRef} className="mb-32">
-          <div className="advanced-glass-container">
-            <div className="relative h-[400px] rounded-2xl overflow-hidden">
+        {/* Feature Grid */}
+        <div className="grid md:grid-cols-2 gap-12 mb-20">
+          {/* Left Column - Image */}
+          <div className="relative">
+            <div className="relative h-[600px] rounded-2xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
-                alt="Logistics and shipping"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" // Add your image
+                alt="Our Team"
+                fill
+                className="object-cover"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <div className="advanced-glass-text">
-                  <h3 className="text-2xl font-bold text-white mb-2">Global Logistics Excellence</h3>
-                  <p className="text-slate-200">Connecting businesses worldwide with innovative solutions</p>
+            </div>
+            {/* Stats Overlay */}
+            <div className="absolute bottom-8 left-8 right-8">
+              <div className="grid grid-cols-3 gap-4">
+                <div className="stat-item">
+                  <span className="text-3xl font-bold text-blue-400">500+</span>
+                  <span className="text-sm text-slate-300">Global Partners</span>
+                </div>
+                <div className="stat-item">
+                  <span className="text-3xl font-bold text-purple-400">98%</span>
+                  <span className="text-sm text-slate-300">Success Rate</span>
+                </div>
+                <div className="stat-item">
+                  <span className="text-3xl font-bold text-teal-400">24/7</span>
+                  <span className="text-sm text-slate-300">Support</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Cards Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-32">
-          {cards.map((card, index) => (
-            <div
-              key={index}
-              ref={el => cardsRef.current[index] = el}
-              className={`day-night-card group ${
-                isDark ? 'dark-card' : 'light-card'
-              }`}
-            >
-              <div className="card-inner">
-                <div className={`card-icon-wrapper ${
-                  isDark ? 'dark-icon' : 'light-icon'
-                }`}>
-                  <span className="text-3xl">{card.icon}</span>
-                </div>
-                <h3 className="card-title-new">{card.title}</h3>
-                <p className={`card-text ${
-                  isDark ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  {card.description}
-                </p>
-              </div>
-              <div className="card-shine"></div>
+          {/* Right Column - Content */}
+          <div className="space-y-12">
+            {/* Mission */}
+            <div className="feature-block">
+              <h3 className="text-2xl font-bold mb-4 flex items-center">
+                <span className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center mr-3">
+                  🎯
+                </span>
+                Our Mission
+              </h3>
+              <p className={`text-lg leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                To revolutionize global logistics through innovative technology and sustainable solutions, 
+                making international trade seamless and efficient for businesses worldwide.
+              </p>
             </div>
-          ))}
+
+            {/* Values */}
+            <div className="feature-block">
+              <h3 className="text-2xl font-bold mb-4 flex items-center">
+                <span className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center mr-3">
+                  ⭐
+                </span>
+                Our Values
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="value-item">
+                  <h4 className="font-semibold mb-2">Innovation</h4>
+                  <p className={isDark ? 'text-slate-400' : 'text-slate-600'}>
+                    Pushing boundaries with cutting-edge solutions
+                  </p>
+                </div>
+                <div className="value-item">
+                  <h4 className="font-semibold mb-2">Reliability</h4>
+                  <p className={isDark ? 'text-slate-400' : 'text-slate-600'}>
+                    Consistent and dependable service delivery
+                  </p>
+                </div>
+                <div className="value-item">
+                  <h4 className="font-semibold mb-2">Sustainability</h4>
+                  <p className={isDark ? 'text-slate-400' : 'text-slate-600'}>
+                    Eco-friendly logistics solutions
+                  </p>
+                </div>
+                <div className="value-item">
+                  <h4 className="font-semibold mb-2">Excellence</h4>
+                  <p className={isDark ? 'text-slate-400' : 'text-slate-600'}>
+                    Commitment to superior quality
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="flex items-center gap-6">
+              <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300">
+                Join Our Team
+              </button>
+              <button className="px-8 py-4 rounded-xl border border-blue-500/30 font-medium hover:bg-blue-500/10 transition-all duration-300">
+                Learn More
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Software Features Section */}
-      
-
-        {/* Enhanced Services Section */}
-       
+        {/* Bottom Section - Timeline */}
+        {/* <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl font-bold text-center mb-12">Our Journey</h3>
+          <div className="space-y-8">
+            <div className="timeline-item">
+              <div className="flex items-center gap-6">
+                <div className="w-24 text-right">
+                  <span className="text-blue-500 font-bold">2022</span>
+                </div>
+                <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                <div>
+                  <h4 className="font-semibold mb-2">Company Founded</h4>
+                  <p className={isDark ? 'text-slate-400' : 'text-slate-600'}>
+                    Launched with a vision to transform global logistics
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="flex items-center gap-6">
+                <div className="w-24 text-right">
+                  <span className="text-purple-500 font-bold">2023</span>
+                </div>
+                <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                <div>
+                  <h4 className="font-semibold mb-2">Global Expansion</h4>
+                  <p className={isDark ? 'text-slate-400' : 'text-slate-600'}>
+                    Extended operations to 50+ countries
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="flex items-center gap-6">
+                <div className="w-24 text-right">
+                  <span className="text-teal-500 font-bold">2024</span>
+                </div>
+                <div className="w-3 h-3 rounded-full bg-teal-500"></div>
+                <div>
+                  <h4 className="font-semibold mb-2">Innovation Milestone</h4>
+                  <p className={isDark ? 'text-slate-400' : 'text-slate-600'}>
+                    Launched AI-powered logistics platform
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */}
       </div>
     </section>
   );
 }
 
-// Create a new FeatureCard component for better code organization
-const FeatureCard = ({ feature, index, isDark, featuresRef, className }) => (
-  <div
-    ref={el => featuresRef.current[index] = el}
-    className={`group ${className}`}
-  >
-    <div className={`p-4 md:p-6 rounded-xl md:rounded-2xl ${isDark ? 'bg-slate-800/50' : 'bg-white/80'}
-      border border-blue-500/10 hover:border-blue-500/30
-      transition-all duration-300 hover:shadow-xl hover:-translate-y-1`}
-    >
-      <div className="flex items-start space-x-4">
-        <div className={`flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl
-          flex items-center justify-center text-xl md:text-2xl
-          ${isDark ? 'bg-slate-700' : 'bg-blue-50'}
-          group-hover:scale-110 transition-transform duration-300`}>
-          {feature.icon}
-        </div>
-        <div>
-          <h3 className="text-lg md:text-xl font-semibold mb-2 group-hover:text-blue-500
-            transition-colors duration-300">
-            {feature.title}
-          </h3>
-          <p className={`text-sm md:text-base ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-            {feature.description}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-); 

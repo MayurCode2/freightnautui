@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Add this at the top of your globals.css */
+@layer utilities {
+  .bg-size-200 {
+    background-size: 200% auto;
+  }
+  
+  .bg-size-300 {
+    background-size: 300% auto;
+  }
+  
+  .bg-pos-0 {
+    background-position: 0% center;
+  }
+  
+  .bg-pos-100 {
+    background-position: 100% center;
+  }
+}
+
 /* Clean background effects */
 .subtle-glow {
   position: absolute;
@@ -620,7 +639,6 @@ main {
 }
 
 .animate-gradient {
-  background-size: 200% auto;
   animation: gradient 8s linear infinite;
 }
 
@@ -678,8 +696,15 @@ main {
 }
 
 @keyframes gradient {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
 }
 
 @keyframes particlesFloat {
@@ -1055,8 +1080,9 @@ html {
 }
 
 .gradient-text {
-  @apply text-transparent bg-clip-text
-         bg-gradient-to-r from-blue-400 to-teal-400;
+  @apply bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500
+         bg-clip-text text-transparent;
+  animation: gradient 8s linear infinite;
 }
 
 .glow-text {
@@ -2010,13 +2036,19 @@ html {
 }
 
 .animate-gradient {
-  background-size: 200% auto;
   animation: gradient 8s linear infinite;
 }
 
 @keyframes gradient {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
 }
 
 /* Problem Section Styles */
@@ -2712,4 +2744,279 @@ html {
 
 .mobile-menu-open {
   animation: slideDown 0.3s ease-out forwards;
+}
+
+/* Add these near the top of your globals.css */
+
+/* Base theme styles */
+:root {
+  --background: 255, 255, 255;
+  --foreground: 15, 23, 42;
+}
+
+.dark {
+  --background: 10, 15, 28;
+  --foreground: 255, 255, 255;
+}
+
+/* Add smooth transitions for theme changes */
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Update existing theme-related styles */
+.dark .bg-white {
+  background-color: rgb(var(--background));
+}
+
+.dark .text-slate-900 {
+  color: rgb(var(--foreground));
+}
+
+/* Add transition for all color changes */
+* {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease, 
+              color 0.3s ease;
+}
+
+/* About Section Specific Styles */
+.stat-item {
+  @apply bg-white/10 backdrop-blur-md rounded-xl p-4 
+         flex flex-col items-center justify-center text-center
+         transition-all duration-300 hover:-translate-y-1;
+}
+
+.feature-block {
+  @apply p-8 rounded-2xl backdrop-blur-md
+         border border-blue-500/10
+         transition-all duration-300
+         hover:border-blue-500/30
+         bg-gradient-to-br from-white/5 to-transparent;
+}
+
+.value-item {
+  @apply p-4 rounded-xl
+         transition-all duration-300
+         hover:-translate-y-1;
+}
+
+.timeline-item {
+  @apply relative;
+}
+
+.timeline-item::before {
+  content: '';
+  @apply absolute left-[124px] top-[24px] w-[2px] h-16
+         bg-gradient-to-b from-current to-transparent
+         opacity-20;
+}
+
+.timeline-item:last-child::before {
+  @apply hidden;
+}
+
+/* Enhanced Hero Section Styles */
+.hero-badge {
+  @apply relative px-6 py-3 rounded-full
+         backdrop-blur-md
+         border border-blue-500/30
+         bg-blue-500/10
+         transition-all duration-500
+         overflow-hidden;
+}
+
+.badge-pulse {
+  @apply absolute w-2 h-2 rounded-full
+         bg-gradient-to-r from-blue-400 to-blue-500
+         mr-2;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.badge-text {
+  @apply relative z-10 text-xl font-medium
+         text-transparent bg-clip-text
+         bg-gradient-to-r from-blue-400 to-blue-500;
+}
+
+.badge-shine {
+  @apply absolute inset-0 opacity-0
+         group-hover:opacity-100
+         transition-opacity duration-500;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+}
+
+.hero-title {
+  @apply text-6xl sm:text-7xl lg:text-8xl
+         font-bold tracking-tight
+         perspective-3d;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500
+         bg-clip-text text-transparent
+         bg-size-200 animate-gradient;
+}
+
+.glow-text {
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
+.hero-description {
+  @apply max-w-2xl mx-auto text-xl sm:text-2xl
+         leading-relaxed opacity-90;
+}
+
+/* Enhanced Stats Cards */
+.stats-card-new {
+  @apply flex items-center gap-4 p-4 rounded-xl
+         backdrop-blur-md border border-white/20
+         bg-white/5 transition-all duration-300
+         hover:bg-white/10 hover:border-blue-500/30;
+}
+
+.stats-icon-new {
+  @apply w-12 h-12 rounded-lg
+         flex items-center justify-center
+         bg-gradient-to-br from-blue-500/10 to-purple-500/10
+         border border-white/10 text-2xl
+         transition-transform duration-300
+         group-hover:scale-110 group-hover:rotate-6;
+}
+
+.stats-value-new {
+  @apply text-2xl font-bold
+         bg-gradient-to-r from-blue-400 to-purple-400
+         bg-clip-text text-transparent;
+}
+
+.stats-label-new {
+  @apply text-sm text-slate-400;
+}
+
+/* Enhanced Button Styles */
+.cta-button {
+  @apply relative px-8 py-4 rounded-xl
+         font-medium text-lg
+         transition-all duration-500
+         overflow-hidden;
+}
+
+.cta-button.primary {
+  @apply bg-gradient-to-r from-blue-500 to-purple-500
+         text-white hover:-translate-y-1;
+}
+
+.cta-button.secondary {
+  @apply border border-blue-500/30
+         hover:bg-blue-500/10 hover:-translate-y-1;
+}
+
+.button-content {
+  @apply relative z-10 flex items-center justify-center gap-2;
+}
+
+.button-icon {
+  @apply w-5 h-5 stroke-current
+         transition-transform duration-300;
+}
+
+.button-glow {
+  @apply absolute inset-0 opacity-0
+         group-hover:opacity-100
+         transition-all duration-500;
+  background: linear-gradient(
+    45deg,
+    rgba(59, 130, 246, 0.4),
+    rgba(147, 51, 234, 0.4)
+  );
+  filter: blur(20px);
+}
+
+.button-border {
+  @apply absolute inset-0 opacity-0
+         group-hover:opacity-100
+         transition-all duration-500;
+  background: linear-gradient(45deg, #3B82F6, #9333EA);
+  mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+}
+
+/* Particle Animation */
+.particle {
+  @apply absolute w-1 h-1 rounded-full
+         bg-blue-500/30;
+  left: var(--x);
+  top: var(--y);
+  animation: float var(--duration) infinite;
+  animation-delay: var(--delay);
+}
+
+/* Light Paths */
+.light-path {
+  @apply absolute h-px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.2),
+    rgba(59, 130, 246, 0.4),
+    rgba(59, 130, 246, 0.2),
+    transparent
+  );
+  animation: lightMove 8s linear infinite;
+  animation-delay: var(--delay);
+}
+
+.path-1 { @apply rotate-[-15deg] w-[60%] top-[20%] left-[-10%]; }
+.path-2 { @apply rotate-[15deg] w-[45%] top-[50%] right-[-10%]; }
+.path-3 { @apply rotate-[-5deg] w-[70%] bottom-[30%] left-[20%]; }
+
+/* Animations */
+@keyframes lightMove {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -20px); }
+}
+
+.animate-gradient {
+  animation: gradient 8s linear infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+.perspective-3d {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
