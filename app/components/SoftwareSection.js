@@ -13,25 +13,25 @@ function SoftwareSection({ isDark }) {
     {
       title: "Easy Document Management",
       description: "Create, manage and share all your logistics documents in one centralized platform. Say goodbye to outdated paper processes and miscommunication issues.",
-      image: "/dashboard-1.jpg", // Add your dashboard image
+      image: "https://images.unsplash.com/photo-1607706189992-eae578626c86?q=80&w=3270&auto=format&fit=crop",
       features: ["Centralized Platform", "Digital Processes", "Easy Sharing"]
     },
     {
       title: "Save Time & Eliminate Errors",
       description: "Avoid customs delays and missed shipments by eliminating manual data re-entry and reducing human error with our streamlined process.",
-      image: "/dashboard-2.jpg", // Add your dashboard image
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
       features: ["No Manual Re-entry", "Error Reduction", "Faster Processing"]
     },
     {
       title: "Brand Consistency",
       description: "Maintain brand consistency with flexible and correct document designs across all your logistics documentation.",
-      image: "/dashboard-3.jpg", // Add your dashboard image
+      image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2670&auto=format&fit=crop",
       features: ["Consistent Branding", "Flexible Design", "Professional Look"]
     },
     {
       title: "Seamless Updates",
       description: "Enter data once, any updates made will sync across all documents seamlessly, ensuring accuracy and efficiency.",
-      image: "/dashboard-4.jpg", // Add your dashboard image
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=3270&auto=format&fit=crop",
       features: ["Real-time Sync", "Automatic Updates", "Data Accuracy"]
     }
   ];
@@ -108,20 +108,24 @@ function SoftwareSection({ isDark }) {
                 <div className="relative group">
                   {/* Image Background Glow */}
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 
-                    rounded-3xl blur-2xl transform group-hover:scale-105 transition-transform duration-500"></div>
+                    rounded-3xl blur-2xl transform group-hover:scale-105 transition-transform duration-500">
+                  </div>
                   
                   {/* Image Container */}
                   <div className="relative rounded-2xl overflow-hidden border border-blue-500/10">
-                    <div className="aspect-w-16 aspect-h-9 relative">
+                    <div className="relative w-full h-[300px] md:h-[400px]"> {/* Fixed height container */}
                       <Image
                         src={feature.image}
                         alt={feature.title}
                         fill
                         className="object-cover transform group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority={index === 0}
                       />
                       {/* Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 
-                        group-hover:opacity-100 transition-opacity duration-300"></div>
+                        group-hover:opacity-100 transition-opacity duration-300">
+                      </div>
                     </div>
                   </div>
                 </div>

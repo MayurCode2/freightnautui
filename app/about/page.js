@@ -78,13 +78,14 @@ export default function About({ isDark }) {
                 src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" // Add your image
                 alt="Our Team"
                 fill
+                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
             </div>
             {/* Stats Overlay */}
-            <div className="absolute bottom-8 left-8 right-8">
+            {/* <div className="absolute bottom-8 left-8 right-8">
               <div className="grid grid-cols-3 gap-4">
                 <div className="stat-item">
                   <span className="text-3xl font-bold text-blue-400">500+</span>
@@ -99,7 +100,7 @@ export default function About({ isDark }) {
                   <span className="text-sm text-slate-300">Support</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Column - Content */}
@@ -155,14 +156,14 @@ export default function About({ isDark }) {
             </div>
 
             {/* CTA */}
-            <div className="flex items-center gap-6">
+            {/* <div className="flex items-center gap-6">
               <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300">
                 Join Our Team
               </button>
               <button className="px-8 py-4 rounded-xl border border-blue-500/30 font-medium hover:bg-blue-500/10 transition-all duration-300">
                 Learn More
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 
