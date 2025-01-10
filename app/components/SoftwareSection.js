@@ -1,14 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 function SoftwareSection({ isDark }) {
-  const sectionRef = useRef(null);
-  const headerRef = useRef(null);
-
   const softwareFeatures = [
     {
       title: "Easy Document Management",
@@ -36,40 +29,8 @@ function SoftwareSection({ isDark }) {
     }
   ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header animation
-      gsap.from(headerRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: "top center+=100",
-          toggleActions: "play none none reverse"
-        }
-      });
-
-      // Features animations
-      document.querySelectorAll('.feature-block').forEach((block, index) => {
-        gsap.from(block, {
-          x: index % 2 === 0 ? -100 : 100,
-          opacity: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: block,
-            start: "top center+=100",
-            toggleActions: "play none none reverse"
-          }
-        });
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-purple-500/5"></div>
@@ -79,9 +40,9 @@ function SoftwareSection({ isDark }) {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div ref={headerRef} className="text-center max-w-4xl mx-auto mb-20">
+        <div className="text-center max-w-4xl mx-auto mb-20">
           <div className="inline-flex items-center px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/5 mb-6">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse mr-2"></span>
+            <span className="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
             <span className="text-blue-500 font-medium">Freightnaut Software</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -100,7 +61,7 @@ function SoftwareSection({ isDark }) {
           {softwareFeatures.map((feature, index) => (
             <div 
               key={index}
-              className={`feature-block flex flex-col lg:flex-row items-center gap-16 
+              className={`flex flex-col lg:flex-row items-center gap-16 
                 ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}
             >
               {/* Image Side */}
@@ -113,7 +74,7 @@ function SoftwareSection({ isDark }) {
                   
                   {/* Image Container */}
                   <div className="relative rounded-2xl overflow-hidden border border-blue-500/10">
-                    <div className="relative w-full h-[300px] md:h-[400px]"> {/* Fixed height container */}
+                    <div className="relative w-full h-[300px] md:h-[400px]">
                       <Image
                         src={feature.image}
                         alt={feature.title}
